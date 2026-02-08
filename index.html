@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Le Frère Infernal</title>
+
+<script src="https://checkout.flutterwave.com/v3.js"></script>
+
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600&family=Poppins:wght@300;400&display=swap" rel="stylesheet">
+
+<style>
+* {margin:0;padding:0;box-sizing:border-box;}
+
+body {
+  background:#000;
+  color:white;
+  font-family:'Poppins',sans-serif;
+  overflow-x:hidden;
+}
+
+.hero {
+  height:100vh;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  background:radial-gradient(circle at center,#111 0%,#000 70%);
+  text-align:center;
+}
+
+.hero h1 {
+  font-family:'Cinzel',serif;
+  font-size:60px;
+  letter-spacing:4px;
+  animation:fadeIn 2s forwards;
+  opacity:0;
+}
+
+.hero p {
+  margin-top:20px;
+  color:#bbb;
+  animation:fadeIn 3s forwards;
+  opacity:0;
+}
+
+@keyframes fadeIn {to{opacity:1;}}
+
+.container {
+  max-width:1100px;
+  margin:auto;
+  padding:80px 20px;
+}
+
+.book {
+  display:flex;
+  flex-wrap:wrap;
+  gap:60px;
+  align-items:center;
+  justify-content:center;
+}
+
+.book img {
+  width:350px;
+  border-radius:12px;
+  box-shadow:0 0 40px rgba(255,255,255,0.2);
+  transition:0.6s;
+}
+
+.book img:hover {
+  transform:scale(1.05);
+  box-shadow:0 0 60px rgba(0,255,255,0.6);
+}
+
+.info {
+  flex:1;
+  min-width:300px;
+}
+
+.price {
+  font-size:32px;
+  margin:25px 0;
+  color:#00f2ff;
+}
+
+.btn {
+  padding:14px 30px;
+  border-radius:30px;
+  border:none;
+  cursor:pointer;
+  margin:8px;
+  font-size:15px;
+  transition:0.4s;
+}
+
+.pay {background:#00c851;color:white;}
+.pay:hover {transform:scale(1.1);}
+
+.paypal {background:#0070ba;color:white;}
+.paypal:hover {transform:scale(1.1);}
+
+.contact-btn {background:#444;color:white;}
+.contact-btn:hover {background:#666;}
+
+.contact {
+  margin-top:100px;
+  text-align:center;
+}
+
+.contact a {
+  display:inline-block;
+  margin:10px;
+  color:#00f2ff;
+  text-decoration:none;
+  font-size:16px;
+}
+
+footer {
+  text-align:center;
+  padding:40px;
+  background:#000;
+  margin-top:100px;
+  color:#555;
+}
+
+/* WhatsApp floating */
+.whatsapp-float {
+  position:fixed;
+  bottom:20px;
+  right:20px;
+  background:#25D366;
+  color:white;
+  padding:15px 18px;
+  border-radius:50%;
+  font-size:22px;
+  text-decoration:none;
+  box-shadow:0 0 20px #25D366;
+  animation:pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% {box-shadow:0 0 10px #25D366;}
+  50% {box-shadow:0 0 25px #25D366;}
+  100% {box-shadow:0 0 10px #25D366;}
+}
+</style>
+</head>
+
+<body>
+
+<div class="hero">
+<h1>LE FRÈRE INFERNAL</h1>
+<p>Un roman captivant de Mariam A.S. BENNY</p>
+</div>
+
+<div class="container">
+
+<div class="book">
+<img src="livre.jpg" alt="Couverture">
+
+<div class="info">
+<h2>Résumé</h2>
+<p>
+Dans cet ouvrage, la jeune romancière nous démontre la suprématie du destin, le caractère mystérieux de la vie, ses turpitudes et ses tours belles et délicates. L'écrivaine met en scène la petite Ifê qui bravera toutes les péripéties de la vie pour offrir le meilleur à son entourage, qui n'hésitera pas à lui montrer la bipolarité de l'espèce humaine.
+</p>
+
+<div class="price">3000 FCFA</div>
+
+<button class="btn pay" onclick="payer()">Mobile Money</button>
+
+<button class="btn paypal"
+onclick="window.location.href='https://www.paypal.com/paypalme/TONLIENPAYPAL/3000'">
+PayPal
+</button>
+
+<a href="tel:+233536726545">
+<button class="btn contact-btn">📞 Appel Direct</button>
+</a>
+
+</div>
+</div>
+
+<div class="contact">
+<h2>Contact & Réseaux sociaux</h2>
+
+<a href="https://wa.me/233536726545" target="_blank">💬 WhatsApp</a>
+<a href="mailto:mariambenny32@gmail.com">📧 mariambenny32@gmail.com</a>
+<a href="#" target="_blank">📘 Facebook : Mariam Benny</a>
+<a href="#" target="_blank">📸 Instagram : Miss Benny</a>
+
+</div>
+
+</div>
+
+<footer>
+© 2026 Mariam A.S. BENNY - Tous droits réservés
+</footer>
+
+<a href="https://wa.me/233536726545" class="whatsapp-float" target="_blank">💬</a>
+
+<script>
+function payer() {
+  FlutterwaveCheckout({
+    public_key: "FLWPUBK_TEST-XXXXXXXX",
+    tx_ref: "TX" + Date.now(),
+    amount: 3000,
+    currency: "XOF",
+    payment_options: "mobilemoney",
+    customer: {
+      email: "client@email.com",
+      phone_number: "233536726545",
+      name: "Acheteur"
+    },
+    customizations: {
+      title: "Le Frère Infernal",
+      description: "Achat du roman",
+      logo: "livre.jpg"
+    }
+  });
+}
+</script>
+
+</body>
+</html>
